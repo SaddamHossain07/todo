@@ -1,0 +1,115 @@
+{% extends 'backend-base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block cat %}
+{% for c in crud %}
+<li class="sidebar-list">
+    <a class="sidebar-link sidebar-title link-nav" href="index.html">
+        <i class="ri-home-line"></i>
+        <span>{{c.cat}}</span>
+    </a>
+</li>
+{% endfor %}-->
+{% endblock %}
+
+
+{% block search %}
+<form class="form-inline search-full" action="javascript:void(0)" method="get">
+    <div class="form-group w-100">
+        <div class="Typeahead Typeahead--twitterUsers">
+            <div class="u-posRelative">
+                <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text"
+                       placeholder="Search All Profiles .." name="q" title="" autofocus>
+                <i class="close-search" data-feather="x"></i>
+                <div class="spinner-border Typeahead-spinner" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <div class="Typeahead-menu"></div>
+        </div>
+    </div>
+</form>
+{% endblock %}
+
+
+{% block content %}
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <!-- Address Start -->
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="title-header option-title">
+                                    <h5>All Product</h5>
+                                    <form class="d-inline-flex">
+                                        <a href="{% url 'create' %}" class="align-items-center btn btn-theme">
+                                            <i data-feather="plus"></i>Add New
+                                        </a>
+                                    </form>
+                                </div>
+
+                                <div class="save-details-box">
+                                    <div class="row g-4">
+                                        {% for c in crud %}
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="save-details">
+                                                <div class="save-name ">
+                                                    <a href="/">
+                                                        <img style="height:250px;" src="{{ c.image.url }}"
+                                                             class="img-fluid blur-up lazyload" alt="">
+                                                    </a>
+                                                </div>
+
+                                                <div class="save-address">
+                                                    <h5 style="color:gray;">{{ c.cat }}</h5>
+                                                </div>
+                                                <br>
+
+                                                <div class="save-address">
+                                                    <h3>{{ c.name }}</h3>
+                                                </div>
+
+                                                <div class="save-address">
+                                                    <h6 style="color:blue;">{{ c.email }}</h6>
+                                                </div>
+                                                <br>
+
+                                                <div class="button">
+                                                    <a href="{% url 'update' c.id %}" class="btn btn-md bg-warning">Update</a>
+                                                    <a href="delete/{{ c.id }}" class="btn btn-md bg-info">Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Address End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <!-- footer start-->
+        <footer class="footer">
+            <div class="row">
+                <div class="col-md-12 footer-copyright text-center">
+                    <p class="mb-0">Copyright 2022 © CIT_SydulAmin_Saddam </p>
+                </div>
+            </div>
+        </footer>
+        <!-- footer end-->
+    </div>
+</div>
+
+{% endblock %}
